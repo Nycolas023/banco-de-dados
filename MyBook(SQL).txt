@@ -1,0 +1,20 @@
+use bdMyBook
+create table tbPeriodo(
+	idPeriodo int primary key identity (1,1) not null
+	, nomePeriodo varchar(6) not null
+	, dataPeriodo smalldatetime not null
+	, horarioPeriodo time not null
+)
+
+create table tbTurma(
+	idTurma int primary key identity (1,1) not null
+	, classeTurma varchar(30)
+)
+
+create table tbAula(
+	idAula int primary key identity (1,1) not null
+	, tipoAula varchar(30)
+	, CONSTRAINT fk_Periodo FOREIGN KEY (idPeriodo) REFERENCES tbPeriodo(idPeriodo)
+	, CONSTRAINT fk_Turma FOREIGN KEY (idTurma) REFERENCES tbTurma(idTurma)
+)
+

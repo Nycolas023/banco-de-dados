@@ -1,0 +1,49 @@
+/*drop database bdEstoque*/
+
+create database bdEstoque
+go
+use bdEstoque
+go
+create table tbFabricante(
+PK_idFabricante int primary key identity(1,1)
+,nomeFabricante varchar(50) not null 
+)
+go
+create table tbCliente(
+PK_idCliente int primary key identity(1,1)
+,nomeCliente varchar(50) not null 
+,cpfCliente varchar(14) unique not null
+,emailCliente varchar(120) not null
+,sexoCliente varchar(40) not null
+,dataNascimentoCliente smalldatetime not null
+)
+go
+create table tbFornecedor(
+PK_idFornecedor int primary key identity(1,1)
+,nomeFornecedor varchar(50) not null
+,contatoFornecedor varchar(14) not null
+)
+go
+create table tbVenda(
+PK_idVenda int primary key identity(1,1)
+,dataVenda date not null
+,valorTotalVenda smallmoney not null
+,FK_idCliente int foreign key (FK_idCliente) references tbCliente(PK_idCliente)
+)
+go
+create table tbProduto(
+PK_idProduto int primary key identity(1,1)
+,descricaoProduto varchar(1000)
+,valorProduto smallmoney not null
+,quantidadeProduto int
+,FK_idFabricante int foreign key (FK_idFabricante) references tbFabricante(PK_idFabricante)
+,FK_idFornecedor int foreign key (FK_idFornecedor) references tbFornecedor(PK_idFornecedor)
+)
+go
+create table tbItensVenda(
+PK_idItensVenda int primary key identity(1,1)
+,quantidadeIntesVenda smallmoney not null
+,subTotalItensVenda smallmoney not null
+,FK_idVenda int foreign key (FK_idVenda) references tbVenda(PK_idVenda)
+,FK_idProduto int foreign key (FK_idProduto) references tbProduto(PK_idProduto)
+)

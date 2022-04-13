@@ -1,0 +1,9 @@
+create database bdMyBook
+use bdMyBook
+
+create table tbAluno(
+   id_Aluno INT AUTO_INCREMENT PRIMARY KEY,
+   nome VARCHAR(40),
+   senha VARCHAR(255),
+   email VARCHAR(255)
+);
